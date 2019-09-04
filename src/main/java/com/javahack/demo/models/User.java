@@ -1,6 +1,14 @@
 package com.javahack.demo.models;
 
-public class User {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.Entity;
+import java.util.Collection;
+
+@Entity
+public class User implements UserDetails {
+    private Integer id;
     private String login;
     private String password;
     private String email;
@@ -11,14 +19,22 @@ public class User {
 
     }
 
-    public User(String login, String password, String email, Integer age, String sex) {
+    public User(Integer id, String login, String password, String email, Integer age, String sex) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.age = age;
         this.sex = sex;
+        this.id = id;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getLogin() {
         return login;
     }
@@ -27,8 +43,38 @@ public class User {
         this.login = login;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
-        return password;
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
