@@ -1,6 +1,7 @@
 package com.javahack.demo.controllers;
 
 import com.javahack.demo.models.User;
+import com.javahack.demo.repos.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MainController {
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserRepository userRepository;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
     @GetMapping({"/index", "/"})
     public String getIndex(Model model, String error, String logout, @AuthenticationPrincipal User user) {
@@ -63,7 +67,12 @@ public class MainController {
     }
 
     @GetMapping(value = "/admin")
-    public String getAdmin() {
+    public String getAdmin(Model model) {
+
+        LOGGER.debug("GET ADMIN [START]");
+        model.addAttribute("users", userRepository.findAll());
+        LOGGER.info(model.toString());
+        LOGGER.debug("GET ADMIN [FINISH]");
         return "admin";
     }
 }

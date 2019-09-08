@@ -3,34 +3,44 @@ package com.javahack.demo.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(nullable = false)
     private String login;
+    @Column(nullable = false)
     private String password;
     private String email;
     private Integer age;
     private String sex;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String  role) {
+        this.role = role;
+    }
 
     public User () {
 
     }
 
-    public User(Integer id, String login, String password, String email, Integer age, String sex) {
+    public User(Integer id, String login, String password, String email, Integer age, String sex, String role) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.age = age;
         this.sex = sex;
         this.id = id;
+        this.role = role;
     }
 
     public Integer getId() {

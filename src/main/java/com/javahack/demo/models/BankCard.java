@@ -1,13 +1,11 @@
 package com.javahack.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
+@Table(name = "bankcard")
 public class BankCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
