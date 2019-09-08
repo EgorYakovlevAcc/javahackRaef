@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>sign in</title>
 </head>
 <body>
-<div id="content" style="text-align: center">
-    <form>
-        <label>
-            username
-        </label>
-        <input type="text"/>
-        <label>
-            password
-        </label>
-        <input type="password"/>
-        <input type="submit" title="sign in"/>
-    </form>
-</div>
+<form class="form" th:userDto="${user}" th:action="@{/login}" method="post">
+    <ul>
+        <li class="title_form">
+            <h3> login form </h3>
+        </li>
+        <li>
+            <input type="text" class="login__username" placeholder="user's name" th:field="*{user.username}"/>
+        </li>
+        <li>
+            <input type="password" class="login__password" placeholder="password" th:field="*{user.password}"/>
+        </li>
+        <li>
+            <button type="submit" class="btn btn-primary login_btn">sign in</button>
+        </li>
+    </ul>
+</form>
 </body>
 </html>
