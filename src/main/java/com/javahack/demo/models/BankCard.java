@@ -5,23 +5,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class BankCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Integer id;  //почему не int?
+    //потому что hibernate умеет работать только с классами объектов, а int - примитив
+    //поэтому юзаем объект integer
     private User cardHolder;
     private String cardNumber;
-    private Calendar expirationDate;
-    private Integer cvc;
+    private Date expirationDate;
+    private String cvc;
 
     public BankCard() {
 
     }
 
-    public BankCard(Integer id, User cardHolder, String cardNumber, Calendar expirationDate, Integer cvc) {
+    public BankCard(Integer id, User cardHolder, String cardNumber, Date expirationDate, String cvc) {
         this.id = id;
         this.cardHolder = cardHolder;
         this.cardNumber = cardNumber;
@@ -53,19 +55,19 @@ public class BankCard {
         this.cardNumber = cardNumber;
     }
 
-    public Calendar getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Calendar expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
-    public Integer getCvc() {
+    public String getCvc() {
         return cvc;
     }
 
-    public void setCvc(Integer cvc) {
+    public void setCvc(String cvc) {
         this.cvc = cvc;
     }
 }
