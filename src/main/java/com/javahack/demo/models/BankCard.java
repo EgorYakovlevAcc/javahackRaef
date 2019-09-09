@@ -11,11 +11,12 @@ public class BankCard {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;  //почему не int?
     //потому что hibernate умеет работать только с классами объектов, а int - примитив
-    //поэтому юзаем объект integer
+    //поэтому юзаем объект Integer
     private User cardHolder;
     private String cardNumber;
     private Date expirationDate;
     private String cvc;
+    private Long balance;
 
     public BankCard() {
 
